@@ -1,0 +1,30 @@
+---
+- name: "Create stack directory — {{ stack.name }}"
+  ansible.builtin.file:
+    path: "{{ compose_base_dir }}/{{ stack.name }}"
+    state: directory
+    mode: "0755"
+
+- name: "Copy compose file — {{ stack.name }}"
+  ansible.builtin.copy:
+    src: "{{ stack.src }}"
+    dest: "{{ compose_base_dir }}/{{ stack.name }}/docker-compose.yml"
+    mode: "0644"
+  register: compose_file
+
+- name: "Copy env file — {{ stack.name }}"
+  ansible.builtin.copy:
+    src: "{{ stack.env_src }}"
+    dest: "{{ stack.env_dest | default(compose_base_dir + '/' + stack.name + '/.env') }}"
+    mode: "0600"
+  no_log: true
+  register: compose_env_file
+  when: stack.env_src is defined
+
+- name: "Start stack — {{ stack.name }}"
+  ansible.builtin.command:
+    cmd: docker compose up -d
+    chdir: "{{ compose_base_dir }}/{{ stack.name }}"
+  changed_when: true
+  when: compose_file.changed or (compose_env_file.changed | default(false))
+  ignore_errors: "{{ ansible_check_mode }}"

@@ -1,0 +1,10 @@
+---
+compose_stacks: []
+compose_base_dir: /opt/stacks
+
+# Example stack definition:
+# compose_stacks:
+#   - name: mystack
+#     src: path/to/compose.yml
+#     env_src: /local/path/.env
+#     env_dest: "{{ compose_base_dir }}/mystack/.env"

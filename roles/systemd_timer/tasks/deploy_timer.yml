@@ -1,0 +1,25 @@
+---
+- name: "Template service unit — {{ timer.name }}"
+  ansible.builtin.template:
+    src: systemd-timer.service.j2
+    dest: "/etc/systemd/system/{{ timer.name }}.service"
+    mode: "0644"
+  notify: Reload systemd
+
+- name: "Template timer unit — {{ timer.name }}"
+  ansible.builtin.template:
+    src: systemd-timer.timer.j2
+    dest: "/etc/systemd/system/{{ timer.name }}.timer"
+    mode: "0644"
+  notify: Reload systemd
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: "Enable and start timer — {{ timer.name }}"
+  ansible.builtin.systemd:
+    name: "{{ timer.name }}.timer"
+    enabled: true
+    state: started
+    daemon_reload: true
+  ignore_errors: "{{ ansible_check_mode }}"

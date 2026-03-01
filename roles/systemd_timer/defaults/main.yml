@@ -1,0 +1,10 @@
+---
+systemd_timer_timers: []
+
+# Example timer definition:
+# systemd_timer_timers:
+#   - name: my-task
+#     description: "Run my task"
+#     command: "/usr/local/bin/my-script.sh"
+#     schedule: "*-*-* 02:00:00"
+#     user: root

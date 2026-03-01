@@ -1,0 +1,15 @@
+---
+common_packages:
+  - curl
+  - wget
+  - git
+  - htop
+  - vim
+  - unzip
+  - gnupg
+
+common_user: deploy
+common_user_shell: /bin/bash
+common_ssh_public_keys: []
+
+common_fail2ban_enabled: true
