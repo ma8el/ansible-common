@@ -40,6 +40,7 @@
       - docker-compose-plugin
     state: present
     update_cache: true
+  ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Add users to docker group
   ansible.builtin.user:
@@ -47,6 +48,7 @@
     groups: docker
     append: true
   loop: "{{ docker_users }}"
+  ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Enable and start Docker service
   ansible.builtin.systemd:
