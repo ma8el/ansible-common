@@ -1,0 +1,17 @@
+---
+# Common role
+common_user: deploy
+common_packages:
+  - curl
+  - wget
+  - git
+  - htop
+  - vim
+  - unzip
+
+# Docker role
+docker_users:
+  - deploy
+
+# Compose role
+compose_base_dir: /opt/stacks

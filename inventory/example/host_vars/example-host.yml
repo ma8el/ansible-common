@@ -1,0 +1,20 @@
+---
+# SSH keys for this host
+common_ssh_public_keys:
+  - "ssh-ed25519 AAAA... user@example"
+
+# Compose stacks deployed to this host
+compose_stacks: []
+# compose_stacks:
+#   - name: traefik
+#     src: stacks/traefik/docker-compose.yml
+#     env_src: stacks/traefik/.env
+
+# Systemd timers on this host
+systemd_timer_timers: []
+# systemd_timer_timers:
+#   - name: backup-db
+#     description: "Nightly database backup"
+#     command: "/usr/local/bin/backup-db.sh"
+#     schedule: "*-*-* 02:00:00"
+#     user: root

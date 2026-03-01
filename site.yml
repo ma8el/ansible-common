@@ -1,0 +1,17 @@
+---
+- name: Configure servers
+  hosts: all
+  become: true
+
+  roles:
+    - role: common
+      tags: [common]
+
+    - role: docker
+      tags: [docker]
+
+    - role: compose
+      tags: [compose]
+
+    - role: systemd_timer
+      tags: [systemd_timer]

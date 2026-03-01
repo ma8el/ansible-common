@@ -1,0 +1,7 @@
+[Unit]
+Description={{ timer.description | default(timer.name) }}
+
+[Service]
+Type=oneshot
+ExecStart={{ timer.command }}
+User={{ timer.user | default('root') }}

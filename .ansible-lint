@@ -1,0 +1,11 @@
+---
+skip_list:
+  - yaml[line-length]
+
+exclude_paths:
+  - .git/
+  - .github/
+  - .venv/
+
+warn_list:
+  - command-instead-of-module

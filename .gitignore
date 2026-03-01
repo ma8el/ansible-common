@@ -1,0 +1,12 @@
+*.retry
+.env
+*.env
+!.ansible-lint
+!.yamllint
+!.pre-commit-config.yaml
+vault.yml
+*vault*.yml
+!**/defaults/main.yml
+.venv/
+.vagrant/
+*.log

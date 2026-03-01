@@ -1,0 +1,40 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install base packages
+  ansible.builtin.apt:
+    name: "{{ common_packages }}"
+    state: present
+
+- name: Create user
+  ansible.builtin.user:
+    name: "{{ common_user }}"
+    shell: "{{ common_user_shell }}"
+    groups: sudo
+    append: true
+    create_home: true
+    state: present
+
+- name: Deploy SSH authorized keys
+  ansible.posix.authorized_key:
+    user: "{{ common_user }}"
+    key: "{{ item }}"
+    state: present
+  loop: "{{ common_ssh_public_keys }}"
+  when: common_ssh_public_keys | length > 0
+
+- name: Install fail2ban
+  ansible.builtin.apt:
+    name: fail2ban
+    state: present
+  when: common_fail2ban_enabled
+
+- name: Enable and start fail2ban
+  ansible.builtin.systemd:
+    name: fail2ban
+    enabled: true
+    state: started
+  when: common_fail2ban_enabled

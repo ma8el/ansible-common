@@ -1,0 +1,9 @@
+[Unit]
+Description=Timer for {{ timer.description | default(timer.name) }}
+
+[Timer]
+OnCalendar={{ timer.schedule }}
+Persistent=true
+
+[Install]
+WantedBy=timers.target
