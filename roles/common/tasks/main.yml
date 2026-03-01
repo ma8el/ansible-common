@@ -38,3 +38,4 @@
     enabled: true
     state: started
   when: common_fail2ban_enabled
+  ignore_errors: "{{ ansible_check_mode }}"
